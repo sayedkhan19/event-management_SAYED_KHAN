@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Organize an Event</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f4f7fb;
+            color: #1f2937;
+        }
+
+        .container {
+            max-width: 850px;
+            margin: 50px auto;
+            padding: 20px;
+        }
+
+        .form-card {
+            background: white;
+            padding: 35px;
+            border-radius: 12px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+        }
+
+        h1 {
+            margin-top: 0;
+            text-align: center;
+            color: #1f2937;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #6b7280;
+            margin-bottom: 30px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 7px;
+            font-weight: bold;
+        }
+
+        input,
+        select,
+        textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #d1d5db;
+            border-radius: 6px;
+            font-size: 15px;
+        }
+
+        textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+
+        input:focus,
+        select:focus,
+        textarea:focus {
+            outline: none;
+            border-color: #2563eb;
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 14px;
+            border: none;
+            border-radius: 6px;
+            background: #2563eb;
+            color: white;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .submit-btn:hover {
+            background: #1d4ed8;
+        }
+
+        .error-message {
+            background: #fee2e2;
+            color: #b91c1c;
+            padding: 12px 15px;
+            border-radius: 6px;
+            margin-bottom: 20px;
+            border: 1px solid #fecaca;
+        }
+
+        .back-link {
+            display: block;
+            text-align: center;
+            margin-top: 20px;
+            color: #2563eb;
+            text-decoration: none;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <div class="form-card">
+
+        <h1>Organize an Event</h1>
+
+        <p class="subtitle">
+            Tell us about your event and our team will contact you.
+        </p>
+
+        {% if error %}
+            <div class="error-message">
+                {{ error }}
+            </div>
+        {% endif %}
+
+        <form method="POST">
+            {% csrf_token %}
+
+            <div class="form-group">
+                <label for="name">Your Name</label>
+                <input
+                    type="text"
+                    id="name"
+                    name="name"
+                    placeholder="Enter your name"
+                    required
+                >
+            </div>
+
+            <div class="form-group">
+                <label for="email">Email Address</label>
+                <input
+                    type="email"
+                    id="email"
+                    name="email"
+                    placeholder="Enter your email"
+                    required
+                >
+            </div>
+
+            <div class="form-group">
+                <label for="phone">Phone Number</label>
+                <input
+                    type="text"
+                    id="phone"
+                    name="phone"
+                    placeholder="Enter your phone number"
+                    required
+                >
+            </div>
+
+            <div class="form-group">
+                <label for="event_name">Event Name</label>
+                <input
+                    type="text"
+                    id="event_name"
+                    name="event_name"
+                    placeholder="Enter event name"
+                    required
+                >
+            </div>
+
+            <div class="form-group">
+                <label for="event_date">Preferred Event Date</label>
+                <input
+                    type="date"
+                    id="event_date"
+                    name="event_date"
+                    required
+                >
+            </div>
+             
+            <div class="form-group">
+    <label for="event_time">Preferred Event Time</label>
+    <input
+        type="time"
+        id="event_time"
+        name="event_time"
+        required
+    >
+</div>
+
+<div class="form-group">
+    <label for="location">Preferred Location</label>
+    <input
+        type="text"
+        id="location"
+        name="location"
+        placeholder="Enter preferred location"
+        required
+    >
+</div>
+
+            <div class="form-group">
+                <label for="expected_guests">Expected Guests</label>
+                <input
+                    type="number"
+                    id="expected_guests"
+                    name="expected_guests"
+                    min="1"
+                    placeholder="Number of expected guests"
+                    required
+                >
+            </div>
+
+            <div class="form-group">
+                <label for="event_type">Event Type</label>
+
+                <select id="event_type" name="event_type" required>
+                    <option value="">Select event type</option>
+                    <option value="Workshop">Workshop</option>
+                    <option value="Conference">Conference</option>
+                    <option value="Seminar">Seminar</option>
+                    <option value="Training">Training</option>
+                    <option value="Meeting">Meeting</option>
+                    <option value="Other">Other</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="message">Additional Details</label>
+
+                <textarea
+                    id="message"
+                    name="message"
+                    placeholder="Tell us more about your event..."
+                    required
+                ></textarea>
+            </div>
+
+            <button type="submit" class="submit-btn">
+                Submit Event Request
+            </button>
+
+        </form>
+
+        <a href="{% url 'event_list' %}" class="back-link">
+            ← Back to Events
+        </a>
+
+    </div>
+
+</div>
+
+</body>
+</html>

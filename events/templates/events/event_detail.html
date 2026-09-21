@@ -1,0 +1,117 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ event.title }} | Event Management</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #f5f7fb;
+            color: #1f2937;
+        }
+
+        .navbar {
+            background: #1f4e79;
+            color: white;
+            padding: 20px 8%;
+        }
+
+        .navbar a {
+            color: white;
+            text-decoration: none;
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        .container {
+            width: 84%;
+            max-width: 900px;
+            margin: 60px auto;
+        }
+
+        .event-detail {
+            background: white;
+            padding: 40px;
+            border-radius: 14px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+        }
+
+        .event-detail h1 {
+            font-size: 36px;
+            margin-bottom: 20px;
+        }
+
+        .description {
+            color: #6b7280;
+            line-height: 1.7;
+            font-size: 17px;
+            margin-bottom: 30px;
+        }
+
+        .info {
+            line-height: 2;
+            font-size: 17px;
+        }
+
+        .back-btn {
+            display: inline-block;
+            margin-top: 30px;
+            padding: 11px 20px;
+            background: #1f4e79;
+            color: white;
+            text-decoration: none;
+            border-radius: 6px;
+        }
+
+        .back-btn:hover {
+            background: #163a5c;
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav class="navbar">
+        <a href="{% url 'event_list' %}">Event Management</a>
+    </nav>
+
+    <main class="container">
+
+        <div class="event-detail">
+
+            <h1>{{ event.title }}</h1>
+
+            <p class="description">
+                {{ event.description }}
+            </p>
+
+            <div class="info">
+                <strong>Date:</strong> {{ event.date }}<br>
+                <strong>Time:</strong> {{ event.time }}<br>
+                <strong>Location:</strong> {{ event.location }}<br>
+                <strong>Capacity:</strong> {{ event.capacity }}
+            </div>
+
+              <a href="{% url 'register_event' event.id %}" class="back-btn">
+               Register Now
+            </a>
+
+            <a href="{% url 'event_list' %}" class="back-btn">
+                ← Back to Events
+            </a>
+
+        </div>
+
+    </main>
+
+</body>
+</html>

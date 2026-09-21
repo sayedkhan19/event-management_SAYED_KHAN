@@ -1,0 +1,179 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Event Management</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #f5f7fb;
+            color: #1f2937;
+        }
+
+        .navbar {
+            background: #1f4e79;
+            color: white;
+            padding: 20px 8%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .navbar h1 {
+            font-size: 24px;
+        }
+
+        .hero {
+            text-align: center;
+            padding: 60px 20px 40px;
+        }
+
+        .hero h2 {
+            font-size: 38px;
+            margin-bottom: 12px;
+        }
+
+        .hero p {
+            color: #6b7280;
+            font-size: 17px;
+        }
+
+        .events-container {
+            width: 84%;
+            max-width: 1100px;
+            margin: 0 auto 60px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 24px;
+        }
+
+        .event-card {
+            background: white;
+            border-radius: 12px;
+            padding: 25px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+        }
+
+        .event-card h3 {
+            font-size: 22px;
+            margin-bottom: 12px;
+        }
+
+        .event-card p {
+            color: #6b7280;
+            line-height: 1.6;
+            margin-bottom: 10px;
+        }
+
+        .event-info {
+            margin: 15px 0;
+            line-height: 1.8;
+        }
+
+        .btn {
+            display: inline-block;
+            margin-top: 12px;
+            padding: 10px 18px;
+            background: #1f4e79;
+            color: white;
+            text-decoration: none;
+            border-radius: 6px;
+        }
+
+        .btn:hover {
+            background: #163a5c;
+        }
+
+        .empty {
+            text-align: center;
+            grid-column: 1 / -1;
+            padding: 40px;
+        }
+
+      .organize-btn {
+    display: inline-block;
+    margin-top: 15px;
+    padding: 12px 22px;
+    background: #1f4e79;
+    color: white;
+    text-decoration: none;
+    border-radius: 6px;
+    font-weight: bold;
+}
+
+.organize-btn:hover {
+    background: #163a5c;
+}
+
+.event-image {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    border-radius: 8px;
+    margin-bottom: 15px;
+}
+
+    </style>
+</head>
+
+<body>
+
+    <nav class="navbar">
+        <h1>Event Management</h1>
+        <span>Upcoming Events</span>
+    </nav>
+
+    <section class="hero">
+        <h2>Discover Events</h2>
+        <p>Find and explore upcoming events.</p> 
+        <a href="{% url 'event_request' %}" class="organize-btn">
+       + Organize an Event
+</a>
+    </section>
+
+    <section class="events-container">
+
+        {% for event in events %}
+
+             <div class="event-card">
+
+    {% if event.image %}
+        <img src="{{ event.image.url }}" alt="{{ event.title }}" class="event-image">
+    {% endif %}
+
+    <h3>{{ event.title }}</h3>
+
+    <p>{{ event.description }}</p>
+            <div class="event-info">
+                <strong>Date:</strong> {{ event.date }}<br>
+                <strong>Time:</strong> {{ event.time }}<br>
+                <strong>Location:</strong> {{ event.location }}<br>
+                <strong>Capacity:</strong> {{ event.capacity }}
+            </div>
+
+            <a href="{% url 'event_detail' event.id %}" class="btn">
+                View Details
+            </a>
+        </div>
+
+        {% empty %}
+
+        <div class="empty">
+            <h3>No events available.</h3>
+        </div>
+
+        {% endfor %}
+
+    </section>
+
+</body>
+</html>
