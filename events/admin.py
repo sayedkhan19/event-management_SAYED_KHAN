@@ -1,23 +1,8 @@
-from django import forms
 from django.contrib import admin
-from cloudinary.forms import CloudinaryFileField
-
 from .models import Event, Registration, EventRequest
 
 
-class EventAdminForm(forms.ModelForm):
-    image = CloudinaryFileField(required=False)
-
-    class Meta:
-        model = Event
-        fields = '__all__'
-
-
-@admin.register(Event)
-class EventAdmin(admin.ModelAdmin):
-    form = EventAdminForm
-
-
+admin.site.register(Event)
 admin.site.register(Registration)
 
 

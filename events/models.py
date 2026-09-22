@@ -1,9 +1,8 @@
 from django.db import models
-from cloudinary.models import CloudinaryField
 class Event(models.Model):
     title = models.CharField(max_length=200)
     description = models.TextField()
-    image = CloudinaryField('image', blank=True, null=True)
+    image = models.URLField(blank=True, null=True)
     date = models.DateField()
     time = models.TimeField()
     location = models.CharField(max_length=200)
