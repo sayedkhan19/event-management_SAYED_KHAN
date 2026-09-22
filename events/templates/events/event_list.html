@@ -147,8 +147,8 @@
              <div class="event-card">
 
     {% if event.image %}
-        <img src="{{ event.image.url }}" alt="{{ event.title }}" class="event-image">
-    {% endif %}
+    <img src="{{ event.image }}" alt="{{ event.title }}" class="event-image">
+       {% endif %}
 
     <h3>{{ event.title }}</h3>
 
